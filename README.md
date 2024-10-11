@@ -5,7 +5,7 @@ Collection of high-performance functions to transform or summarize array of numb
 ## Examples
 
 ```typescript
-import { avg, pow, regression, shift, squared, std, sum } from "@sauber/statistics";
+import { avg, correlation, dot, pow, regression, shift, squared, std, sum } from "@sauber/statistics";
 
 // Average of numbers. Result is 2
 const average: number = avg([1, 2, 3]);
@@ -22,9 +22,15 @@ const squares: number[] = squared([1, 2, 3]);
 // Raise to the power of same number. Result is [1, 8, 27]
 const raised: number[] = pow([1, 2, 3], 3);
 
+// Multiply pairs of numbers: Resul is [1, 4, 9]
+const pairs: number[] = dot([1, 2, 3], [1, 2, 3]);
+
 // Standard deviation. Result is 1
 const stddev: number = std([1, 2, 3]);
 
 // Linear regression. Result is { intercept: 1, gradiant: 1 }
 const reg = regression([1, 2, 3]);
+
+// Pearson Correlation Coefficient. Result is 0.5
+const coef: number = correlation([1, 2, 3], [1, 3, 2])
 ```
