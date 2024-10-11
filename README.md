@@ -1,4 +1,4 @@
-# deno-statistics
+# Statistics
 
 Collection of high-performance functions to transform or summarize array of number.
 
