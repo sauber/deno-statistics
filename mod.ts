@@ -20,6 +20,10 @@ export const pow = (values: Numbers, exponent: number): Numbers =>
 /** number * number */
 export const squared = (values: Numbers): Numbers => values.map((x) => x * x);
 
+/** Multiply pairs of numbers */
+export const dot = (a: Numbers, b: Numbers): Numbers =>
+  a.map((_, i) => a[i] * b[i]);
+
 /** Standard Deviation */
 export function std(values: Numbers): number {
   const mean: number = avg(values);
@@ -50,4 +54,32 @@ export function regression(values: Numbers): {
   const intercept: number = sum[1] / len - (gradiant * sum[0]) / len;
 
   return { intercept: intercept, gradiant: gradiant };
+}
+
+/** Calculate Pearson Correlation Coefficient of two datasets
+ * @param a List of numbers in first set
+ * @param b List of numbers in second set
+ * @returns The numerical coefficient in range -1.0 to 1.0
+ */
+export function correlation(a: Numbers, b: Numbers): number {
+  // Confirm count if elements
+  if (a.length < 2 || b.length < 2)
+    throw new Error(`Datasets must have at least 2 elements each.`);
+
+  // Confirm same length
+  if (a.length != b.length)
+    throw new Error(
+      `Datasets must have same length, but have ${a.length} and ${b.length} elements.`
+    );
+
+  // Calculate coefficient
+  const n: number = a.length;
+  const x: number = sum(a);
+  const y: number = sum(b);
+  const xx: number = sum(dot(a, a));
+  const yy: number = sum(dot(b, b));
+  const xy: number = sum(dot(a, b));
+  const coefficient: number =
+    (n * xy - x * y) / Math.sqrt((n * xx - x * x) * (n * yy - y * y));
+  return coefficient;
 }
