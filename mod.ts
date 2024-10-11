@@ -26,7 +26,7 @@ export function std(values: Numbers): number {
   const variances: Numbers = shift(values, -mean);
   const sq: Numbers = squared(variances);
   const total: number = sum(sq);
-  const result: number = Math.sqrt(total / (values.length - 1));
+  const result: number = Math.sqrt(total / values.length);
   return result;
 }
 

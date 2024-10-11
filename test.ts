@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { assertAlmostEquals, assertEquals } from "@std/assert";
 import { avg, pow, regression, shift, squared, std, sum } from "./mod.ts";
 
 Deno.test("sum", () => {
@@ -22,7 +22,8 @@ Deno.test("power", () => {
 });
 
 Deno.test("standard deviation", () => {
-  assertEquals(std([1, 2, 3]), 1);
+  assertAlmostEquals(std([1, 2, 3]), 0.816496580927726);
+  assertAlmostEquals(std([1, 2, 3, 4, 5]), 1.4142135623730951);
 });
 
 Deno.test("linear regression", () => {
