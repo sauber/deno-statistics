@@ -4,6 +4,7 @@ import {
   correlation,
   dot,
   pow,
+  randn,
   regression,
   shift,
   squared,
@@ -66,4 +67,13 @@ Deno.test("Correlation Cases", () => {
   for (const t of cases) {
     assertEquals(correlation(t[0], t[1]), t[2]);
   }
+});
+
+Deno.test("Normal Distribution Random", () => {
+  const n: number[] = [];
+  for (let i = 0; i < 1000; i++) n.push(randn());
+  const a = avg(n);
+  const d = std(n);
+  assertAlmostEquals(a, 0.5, 0.1);
+  assertAlmostEquals(d, 0.1, 0.01);
 });

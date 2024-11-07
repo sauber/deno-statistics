@@ -32,5 +32,8 @@ const stddev: number = std([1, 2, 3]);
 const reg = regression([1, 2, 3]);
 
 // Pearson Correlation Coefficient. Result is 0.5
-const coef: number = correlation([1, 2, 3], [1, 3, 2])
+const coef: number = correlation([1, 2, 3], [1, 3, 2]);
+
+// Box-Muller Normal Distribution. Result is between 0 and 1.
+const random: number = randn();
 ```
