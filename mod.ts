@@ -86,11 +86,30 @@ export function correlation(a: Numbers, b: Numbers): number {
 
 /** Box-Muller Normal Distribution Between 0 and 1 */
 export function randn(): number {
-  let u = 0, v = 0;
+  let u = 0,
+    v = 0;
   while (u === 0) u = Math.random(); // Converting [0,1) to (0,1)
   while (v === 0) v = Math.random();
   let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
   num = num / 10.0 + 0.5; // Translate to 0 -> 1
   if (num > 1 || num < 0) return randn(); // resample between 0 and 1
   return num;
+}
+
+/** Create signal with fewer data points */
+export function downsample(input: number[], length: number): number[] {
+  // No downsample if too little data
+  if (length >= input.length) return input;
+
+  // Divide signal into chunks and average each
+  const output: number[] = [];
+  const chunkSize = input.length / length;
+  for (let i = 1; i <= length; ++i)
+    output.push(
+      avg(
+        input.slice(Math.floor((i - 1) * chunkSize), Math.ceil(i * chunkSize))
+      )
+    );
+
+  return output;
 }

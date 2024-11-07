@@ -3,6 +3,7 @@ import {
   avg,
   correlation,
   dot,
+  downsample,
   pow,
   randn,
   regression,
@@ -76,4 +77,10 @@ Deno.test("Normal Distribution Random", () => {
   const d = std(n);
   assertAlmostEquals(a, 0.5, 0.1);
   assertAlmostEquals(d, 0.1, 0.01);
+});
+
+Deno.test("Downsample signal", () => {
+  const input = [1, 2, 3, 4, 7, 4, 3, 2, 1];
+  const output = downsample(input, 5);
+  assertEquals(output, [1.5, 3, 5, 3, 1.5]);
 });
