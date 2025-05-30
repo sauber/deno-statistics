@@ -38,5 +38,5 @@ const coef: number = correlation([1, 2, 3], [1, 3, 2]);
 const random: number = randn();
 
 // Downsample signal. Result is [1.5, 3, 5, 3, 1.5],
-const output: number[] = downsample([1, 2, 3, 4, 7, 4, 3, 2, 1]);
+const output: number[] = downsample([1, 2, 3, 4, 7, 4, 3, 2, 1], 5);
 ```
