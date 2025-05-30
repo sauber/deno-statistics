@@ -63,14 +63,16 @@ export function regression(values: Numbers): {
  */
 export function correlation(a: Numbers, b: Numbers): number {
   // Confirm count if elements
-  if (a.length < 2 || b.length < 2)
+  if (a.length < 2 || b.length < 2) {
     throw new Error(`Datasets must have at least 2 elements each.`);
+  }
 
   // Confirm same length
-  if (a.length != b.length)
+  if (a.length != b.length) {
     throw new Error(
-      `Datasets must have same length, but have ${a.length} and ${b.length} elements.`
+      `Datasets must have same length, but have ${a.length} and ${b.length} elements.`,
     );
+  }
 
   // Calculate coefficient
   const n: number = a.length;
@@ -79,8 +81,8 @@ export function correlation(a: Numbers, b: Numbers): number {
   const xx: number = sum(dot(a, a));
   const yy: number = sum(dot(b, b));
   const xy: number = sum(dot(a, b));
-  const coefficient: number =
-    (n * xy - x * y) / Math.sqrt((n * xx - x * x) * (n * yy - y * y));
+  const coefficient: number = (n * xy - x * y) /
+    Math.sqrt((n * xx - x * x) * (n * yy - y * y));
   return coefficient;
 }
 
@@ -104,12 +106,21 @@ export function downsample(input: number[], length: number): number[] {
   // Divide signal into chunks and average each
   const output: number[] = [];
   const chunkSize = input.length / length;
-  for (let i = 1; i <= length; ++i)
+  for (let i = 1; i <= length; ++i) {
     output.push(
       avg(
-        input.slice(Math.floor((i - 1) * chunkSize), Math.ceil(i * chunkSize))
-      )
+        input.slice(Math.floor((i - 1) * chunkSize), Math.ceil(i * chunkSize)),
+      ),
     );
-
+  }
   return output;
+}
+
+// Mean Squared Error
+export function mse(a: Numbers, b: Numbers): number {
+  const sum: number = a.reduce(
+    (acc, val, i) => acc + Math.pow(val - b[i], 2),
+    0,
+  );
+  return sum / a.length;
 }

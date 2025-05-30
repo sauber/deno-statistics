@@ -4,6 +4,7 @@ import {
   correlation,
   dot,
   downsample,
+  mse,
   pow,
   randn,
   regression,
@@ -83,4 +84,11 @@ Deno.test("Downsample signal", () => {
   const input = [1, 2, 3, 4, 7, 4, 3, 2, 1];
   const output = downsample(input, 5);
   assertEquals(output, [1.5, 3, 5, 3, 1.5]);
+});
+
+Deno.test("Mean Squared Error", () => {
+  const a = [1, 2, 3];
+  const b = [4, 5, 6];
+  const result = mse(a, b);
+  assertEquals(result, 9);
 });
